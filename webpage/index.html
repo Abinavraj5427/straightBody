@@ -1,32 +1,36 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>straightBody</title>
 
-        <!-- CSS -->
-        <link href="https://fonts.googleapis.com/css2?family=Suez+One&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="/css/styles.css">
-        <link rel="stylesheet" href="/css/index.css">
+<head>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.24.0/firebase-app.js"></script>
 
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/7.24.0/firebase-auth.js"></script>
 
-        <!-- JavaScript -->
-        <script type="text/javascript" src="/eel.js"></script>
-        <script type="text/javascript" src="/js/index.js"></script>
-    </head>
     
-    <body>
+    <title>straightBody</title>
 
-        <div id = "body_container">
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/index.css">
 
-            <div id = "login_form">
-                <h1>Straight Body</h1>
-                <input type = "text" placeholder = "username"/>
-                <input type = "text" placeholder = "password"/>
-                <!-- <input type = "button" value = "Login" onclick = "login()" /> -->
-                <a href = "dash.html">LOGIN</a>
-            </div>
+    <!-- JavaScript -->
+    <script type="text/javascript" src="/eel.js"></script>
+    <script type="text/javascript" src="/js/index.js"></script>
+    
+</head>
 
-        </div>
+<body>
+    <script src = js\login.js></script>
+    <h1>Straight Body</h1>
+    <input type="text" placeholder="username" id = "username" />
+    <input type="text" placeholder="password" id = "password"/>
+    <!-- <input type = "button" value = "Login" onclick = "login()" /> -->
+    <button onclick="signUp()">Sign Up</button>
+    <button onclick="signIn()">Sign In</button>
+    <button onclick="signOut()">Log out</button>
+</body>
 
-    </body>
 </html>
