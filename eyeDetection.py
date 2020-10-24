@@ -6,7 +6,7 @@ cap = cv2.VideoCapture(0)
 cap.set(10, 150)
 
 
-eyes_cascade = cv2.CascadeClassifier(r"/Users/grantshim/OneDrive - The University of Texas at Austin/Hackathon/straightBody/cascades/haarcascade_eye.xml")
+eyes_cascade = cv2.CascadeClassifier(r"./cascades/haarcascade_eye.xml")
 
 while True:
     ret, frame = cap.read()
