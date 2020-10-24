@@ -1,3 +1,9 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
 .topnav {
     background-color: #333;
     overflow: hidden;
@@ -26,4 +32,15 @@
 .topnav a:hover{
     background-color: gray;
     color: black;
+}
+
+
+body{
+    text-align: center;
+    font-family: 'Suez One', serif;
+}
+
+
+h1{
+    margin-top: 10vh;
 }
