@@ -19,16 +19,16 @@ min_ratio = 0
 max_ratio = 1000
 
 while True:
-    ret, frame = cap.read()
-    frame = cv2. cvtColor(frame, cv2.COLOR_BGR2HSV)
+    ret, imgorg = cap.read()
+    frame = cv2. cvtColor(imgorg, cv2.COLOR_BGR2HSV)
     frame = cv2.inRange(frame, (hue[0], sat[0], val[0]), (hue[1], sat[1], val[1]))
     ksize = int(6 * round(5) + 1)
     frame = cv2.GaussianBlur(frame, (ksize, ksize), round(5))
     frame = cv2.normalize(frame, frame, 0, 255, cv2.NORM_MINMAX)
     _, threshold = cv2.threshold(frame, 12, 255, cv2.THRESH_BINARY_INV)
 
-    contours, _= cv2.findContours(threshold, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
-    #print(len(contours))
+    contours, _ = cv2.findContours(threshold, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
+    print(len(contours))
     #input_contours = contours
     #output = []
     # for contour in input_contours:
@@ -55,7 +55,10 @@ while True:
     # contournew = output
     #
     # print(contournew)
-    contour = cv2.drawContours(threshold, contours, -1, (0, 0, 255), 3)
+
+    print("SHAPE")
+    print(imgorg.shape)
+    contour = cv2.drawContours(imgorg, contours, -1, (0, 0, 255), 3)
 
 
 
