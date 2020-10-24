@@ -1,6 +1,7 @@
 import cv2
 import numpy as np
 import  dlib
+from math import hypot
 
 cap = cv2.VideoCapture(0)
 
@@ -9,6 +10,8 @@ predictor = dlib.shape_predictor(r"C:/Users/drajc/OneDrive/Desktop/straightBody/
 
 def midpoint(p1, p2):
     return int((p1.x + p2.x)/2), int((p1.y + p2.y)/2)
+
+font = cv2.FONT_HERSHEY_COMPLEX
 
 while True:
     _, frame = cap.read()
@@ -30,6 +33,13 @@ while True:
         hor_line = cv2.line(frame, left_point, right_point, (0,255,0),2)
         ver_line = cv2.line(frame, center_top, center_bottom, (0,255,0), 2)
 
+        hor_line_length = hypot((left_point[0]-right_point[0]), (left_point[1]- right_point[1]))
+        ver_line_length = hypot((center_top[0]- center_bottom[0]), (center_top[1] - center_bottom[1]))
+        #print(str(ver_line_length))
+        #print(ver_line_length, hor_line_length)
+        ratio = (hor_line_length/ver_line_length)
+        if ratio > 5.7:
+            cv2.putText(frame, "Blinking", (50,150), font, 4, (255,0,0))
 
         #x =  landmarks.part(36).x
         #y = landmarks.part(36).y
