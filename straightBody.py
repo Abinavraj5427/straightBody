@@ -6,13 +6,6 @@ from camera import VideoCamera
 # Set web files folder
 eel.init('webpage')
 
-@eel.expose                         # Expose this function to Javascript
-def say_hello_py(x):
-    print('Hello from %s' % x)
-
-say_hello_py('Python World!')
-eel.say_hello_js('Python World!')   # Call a Javascript function
-
 def gen(camera):
     while True:
         frame = camera.get_frame()
@@ -28,8 +21,5 @@ def get_video():
         blob = blob.decode("utf-8")
         eel.updateImageSrc(blob)()
         # time.sleep(0.1)
-
-
-
 
 eel.start('index.html', size=(300, 200))  # Start
