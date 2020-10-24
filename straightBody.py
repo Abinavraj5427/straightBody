@@ -22,4 +22,4 @@ def get_video():
         eel.updateImageSrc(blob)()
         # time.sleep(0.1)
 
-eel.start('index.html', size=(300, 200))  # Start
+eel.start('index.html', size=(900, 700))  # Start
