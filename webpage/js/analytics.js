@@ -28,7 +28,7 @@ window.onload = function load() {
     events.get().then((querySnapshot) => {
         const tempDoc = []
         querySnapshot.forEach((doc) => {
-            keys.push(count++);
+            keys.push(++count);
             values.push(doc.data().area);
             tempDoc.push({ id: doc.id, ...doc.data() })
         })
@@ -59,20 +59,19 @@ window.onload = function load() {
     keys2 = []
     values2 = []
 
-    count = 0;
+    var count2=0;
     var events2 = firebase.firestore().collection('EyeMovement')
     events2 = events2.orderBy('time', 'desc').limit(10);
     events2.get().then((querySnapshot) => {
         const tempDoc = []
         querySnapshot.forEach((doc) => {
-            keys2.push(count++);
+            keys2.push(++count2);
             if (doc.data().onScreen == false) {
                 values2.push(0);
             }
             else {
                 values2.push(1);
             }
-            tempDoc.push({ id: doc.id, ...doc.data() })
         })
         console.log(tempDoc)
         update2();
