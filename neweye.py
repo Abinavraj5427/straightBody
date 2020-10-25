@@ -4,7 +4,7 @@ import  dlib
 from math import hypot
 
 cap = cv2.VideoCapture(0)
-cap.set(10,200)
+cap.set(10,210)
 detector = dlib.get_frontal_face_detector()
 predictor = dlib.shape_predictor(r"./shape_predictor_68_face_landmarks.dat")
 
@@ -102,8 +102,8 @@ while True:
         gaze_ratio_right_eye = get_gaze_ratio([42,43,44,45,46,47], landmarks)
         gaze_ratio = (gaze_ratio_right_eye+gaze_ratio_left_eye)/2
         #cv2.putText(frame, str(gaze_ratio_left_eye), (50,100), font, 2, (0,0,255),3)
-        cv2.putText(frame, str(gaze_ratio), (50,150), font, 2, (0,0,255),3)
-        if gaze_ratio >= .65 and gaze_ratio <= .95:
+        cv2.putText(frame, str(gaze_ratio), (450,475), font, .75, (255,0,0),3)
+        if gaze_ratio >= .70 and gaze_ratio <= .95:
             counter+=1
         #x =  landmarks.part(36).x
         #y = landmarks.part(36).y
