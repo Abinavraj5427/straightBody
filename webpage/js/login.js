@@ -46,6 +46,7 @@ function signIn() {
 function signOut() {
     auth.signOut();
     alert("Signed out");
+    window.location.href = "./index.html";
 }
 
 auth.onAuthStateChanged(function (user) {

@@ -13,7 +13,7 @@
     top: 0;
     left: 0;
     width: 100%;
-    text-align: center;
+    /* text-align: center; */
     z-index: 2;
     display: inline-block;
      
@@ -34,6 +34,34 @@
     /* font-size: 1vw; */
 }
 
+.newtop {
+    background-color: rgb(131, 142, 211);
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 15%;
+    /* text-align: center; */
+    z-index: 10;
+    display: inline-block;
+}
+
+.newtop a {
+    display: inline-block;
+    color: #f2f2f2;
+    text-align: right;
+    padding: 14px 16px;
+    text-decoration: none;
+    text-transform: uppercase;
+    padding-right: 4vw;
+    padding-left: 4vw;
+    letter-spacing: 0.2vw;
+    text-indent: .2vw;
+    font-family: metropolisbold;
+    /* font-size: 1vw; */
+    z-index: 11;
+}
+
 .topnav a:hover{
     background-color: rgb(69, 84, 172);
     color: black;
@@ -41,7 +69,7 @@
 
 
 body{
-    text-align: center !important;
+    text-align: center;
     font-family: metropolisbold;
     
 }
@@ -55,8 +83,8 @@ body{
     background-color: rgb(131,142,211);
     overflow: hidden;
     position: absolute;
-    bottom: 30px;
-    left: 10%;
+    bottom: 25%;
+    left: 12%;
     width: 250px;
     height: 250px;
     text-align: center;
@@ -138,8 +166,8 @@ body{
     background-color: rgb(131,142,211);
     overflow: hidden;
     position: absolute;
-    bottom: 30px;
-    left: 40%;
+    bottom: 25%;
+    left: 43.5%;
     width: 250px;
     height: 250px;
     text-align: center;
@@ -205,8 +233,8 @@ body{
     background-color: rgb(131,142,211);
     overflow: hidden;
     position: absolute;
-    bottom: 30px;
-    left: 70%;
+    bottom: 25%;
+    left: 75%;
     width: 250px;
     height: 250px;
     text-align: center;
