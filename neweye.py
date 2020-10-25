@@ -4,9 +4,9 @@ import  dlib
 from math import hypot
 
 cap = cv2.VideoCapture(0)
-
+cap.set(10,210)
 detector = dlib.get_frontal_face_detector()
-predictor = dlib.shape_predictor(r"C:/Users/drajc/OneDrive/Desktop/straightBody/shape_predictor_68_face_landmarks.dat")
+predictor = dlib.shape_predictor(r"./shape_predictor_68_face_landmarks.dat")
 
 def midpoint(p1, p2):
     return int((p1.x + p2.x)/2), int((p1.y + p2.y)/2)
@@ -81,8 +81,8 @@ while True:
         right_eye_ratio = get_blinking_ratio([36,37,38,39,40,41], landmarks)
         left_eye_ratio = get_blinking_ratio([42,43,44,45,46,47], landmarks)
         
-        if left_eye_ratio > 5.4 and right_eye_ratio > 5.7:
-            cv2.putText(frame, "Blinking", (50,150), font, 4, (255,0,0))
+        #if left_eye_ratio > 5.4 and right_eye_ratio > 5.7:
+        #    cv2.putText(frame, "Blinking", (50,150), font, 4, (255,0,0))
 
         #GAZE DECTECTION CODE
         
@@ -102,8 +102,8 @@ while True:
         gaze_ratio_right_eye = get_gaze_ratio([42,43,44,45,46,47], landmarks)
         gaze_ratio = (gaze_ratio_right_eye+gaze_ratio_left_eye)/2
         #cv2.putText(frame, str(gaze_ratio_left_eye), (50,100), font, 2, (0,0,255),3)
-        cv2.putText(frame, str(gaze_ratio), (50,150), font, 2, (0,0,255),3)
-        if gaze_ratio >= .85 and gaze_ratio <= 2.2:
+        cv2.putText(frame, str(gaze_ratio), (450,475), font, .75, (255,0,0),3)
+        if gaze_ratio >= .70 and gaze_ratio <= .95:
             counter+=1
         #x =  landmarks.part(36).x
         #y = landmarks.part(36).y
