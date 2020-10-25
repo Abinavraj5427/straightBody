@@ -42,7 +42,7 @@ def shoulderProcess(raw):
     ksize = int(6 * round(5) + 1)
     frame = cv2.GaussianBlur(frame, (ksize, ksize), round(5))
     frame = cv2.normalize(frame, frame, 0, 255, cv2.NORM_MINMAX)
-    _, threshold = cv2.threshold(frame, 5, 255, cv2.THRESH_BINARY_INV)
+    _, threshold = cv2.threshold(frame, 10, 255, cv2.THRESH_BINARY_INV)
 
     contours, _ = cv2.findContours(frame, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
 

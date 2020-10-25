@@ -1,3 +1,4 @@
+
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 var firebaseConfig = {
@@ -16,57 +17,126 @@ var firestore = firebase.firestore();
 
 var user = "Shreyas";
 var docRef = firestore.collection("Users").doc(user);
-var userID;
-window.onload = function fetch() {
-    docRef.get().then(function (doc) {
-        if (doc && doc.exists) {
-            const myData = doc.data();
-            document.getElementById("titleName").innerHTML = myData.FirstName;
-            userID = myData.UserNumber;
-        }
-        else {
-            console.log("error");
-        }
-    })
-}
 
-var data2;
-function load() {
-    docRef = firestore.collection("EyeMovement").doc(String(userID));
-    docRef.onSnapshot(function (doc) {
-        const myData = doc.data();
-        data2 = myData.FocusedTime;
-        console.log(data2)
+window.onload = function load() {
+    var keys = [];
+    var values = [];
+
+    var count = 0;
+    var events = firebase.firestore().collection('Postures')
+    events = events.orderBy('time', 'desc').limit(10);
+    events.get().then((querySnapshot) => {
+        const tempDoc = []
+        querySnapshot.forEach((doc) => {
+            keys.push(count++);
+            values.push(doc.data().area);
+            tempDoc.push({ id: doc.id, ...doc.data() })
+        })
+        console.log(tempDoc)
         update();
     })
 
-    function update(){
-    var ctx = document.getElementById('myChart').getContext('2d');
-    var keys = [];
-    var values = [];
-    for (i = 0; i < data2.length; i++) {
-        keys.push(i);
-        values.push(data2[i]);
-
+    function update() {
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var chart = new Chart(ctx, {
+            // The type of chart we want to create
+            type: 'line',
+            // The data for our dataset
+            data: {
+                labels: keys,
+                datasets: [{
+                    label: 'Posture',
+                    backgroundColor: 'rgb(255, 99, 132)',
+                    borderColor: 'rgb(255, 99, 132)',
+                    data: values,
+                }]
+            },
+            // Configuration options go here
+            options: {}
+        });
     }
-    var arr = [0, 1, 2]
-    var chart = new Chart(ctx, {
-        // The type of chart we want to create
-        type: 'line',
-        // The data for our dataset
-        data: {
-            labels: keys,
-            datasets: [{
-                label: 'Posture',
-                backgroundColor: 'rgb(255, 99, 132)',
-                borderColor: 'rgb(255, 99, 132)',
-                data: values,
-            }]
-        },
-        // Configuration options go here
-        options: {}
-    });
-}
+
+    keys2 = []
+    values2 = []
+
+    count = 0;
+    var events2 = firebase.firestore().collection('EyeMovement')
+    events2 = events2.orderBy('time', 'desc').limit(10);
+    events2.get().then((querySnapshot) => {
+        const tempDoc = []
+        querySnapshot.forEach((doc) => {
+            keys2.push(count++);
+            if (doc.data().onScreen == false) {
+                values2.push(0);
+            }
+            else {
+                values2.push(1);
+            }
+            tempDoc.push({ id: doc.id, ...doc.data() })
+        })
+        console.log(tempDoc)
+        update2();
+    })
+
+    function update2() {
+        var ctx = document.getElementById('otherChart').getContext('2d');
+        var chart = new Chart(ctx, {
+            // The type of chart we want to create
+            type: 'line',
+            // The data for our dataset
+            data: {
+                labels: keys2,
+                datasets: [{
+                    label: 'Eye Movement',
+                    backgroundColor: 'rgb(255, 99, 132)',
+                    borderColor: 'rgb(255, 99, 132)',
+                    data: values2,
+                }]
+            },
+            // Configuration options go here
+            options: {
+                xAxes: [{
+                    ticks: {
+                        autoSkip: true,
+                        maxTicksLimit: 5
+                    }
+                }]
+            }
+        });
+    }
+
+    contactCounter = []
+    contact = []
+    const events3 = firebase.firestore().collection('EyeMovement')
+    events3.get().then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+            contactCounter.push(doc.data().contactCounter);
+            contact.push(doc.data().counter);
+        })
+        update3();
+    })
+
+    function update3() {
+        var thi = document.getElementById('concpi').getContext('2d');
+        var concpi = new Chart(thi, {
+            // The type of chart we want to create
+            type: 'doughnut',
+
+            // The data for our dataset
+            data: {
+                labels: ["Total Concentration"],
+                datasets: [{
+                    data: [20, 10],
+                    backgroundColor: ['rgb(131,142,211)', 'rgb(9, 8, 61)'],
+                    borderColor: ['rgb(131, 142, 211)', 'rgb(9, 8, 61)']
+                }]
+            },
+
+            // Configuration options go here
+            options: {}
+        });
+    }
+
 }
 
 
