@@ -98,6 +98,7 @@ def shoulderProcess(raw):
         'average': (last_doc['total']*last_doc['average']+area)/(last_doc['total']+1),
         'time': firestore.SERVER_TIMESTAMP,
         'total': last_doc['total']+1,
+        'change': (area*100)/((last_doc['total']*last_doc['average']+area)/(last_doc['total']+1)),
 
      })
 
