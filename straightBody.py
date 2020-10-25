@@ -2,7 +2,7 @@ import eel
 import cv2
 import base64
 import firebase_setup
-
+import Notif as n
 from firebase_admin import credentials
 from firebase_admin import firestore
 
@@ -31,5 +31,13 @@ def get_video():
         blob = blob.decode("utf-8")
         eel.updateImageSrc(blob)()
         # time.sleep(0.1)
+
+@eel.expose
+def get_screen_time():
+    return n.get_screen_time()
+
+@eel.expose
+def get_break():
+    return n.get_break()
 
 eel.start('index.html', size=(900, 700))  # Start

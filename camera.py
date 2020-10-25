@@ -3,6 +3,7 @@
 import cv2
 import Shoulder as sh
 import neweye as eye
+import Notif as n
 
 class VideoCamera(object):
     def __init__(self):
@@ -29,6 +30,7 @@ class VideoCamera(object):
         success, raw = self.video.read()
         frame = sh.shoulderProcess(raw)
         output = eye.eyeProcess(frame)
+        n.notify()
 
         ret, jpeg = cv2.imencode('.jpg', output)
         return jpeg.tobytes()

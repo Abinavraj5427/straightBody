@@ -156,8 +156,10 @@
                 </div>
                 <p id="sct1">~</p>
                 <script type="text/javascript">
-                    var screenvar = 50;
-                    document.getElementById('sct1').innerHTML = screenvar;
+                    eel.get_screen_time()().then(val => 
+                        {document.getElementById('sct1').innerHTML = val;}
+                    );
+                    
                 </script>
             </div>
             <div class="breakbox">
@@ -166,8 +168,9 @@
                 </div>
                 <p id="nbr1">~</p>
                 <script type="text/javascript">
-                    var breakvar = 50;
-                    document.getElementById('nbr1').innerHTML = breakvar;
+                    eel.get_break()().then(val =>
+                        {document.getElementById('nbr1').innerHTML = val;}
+                    );
                 </script>
             </div>
 
