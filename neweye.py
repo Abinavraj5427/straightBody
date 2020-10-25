@@ -1,7 +1,16 @@
 import cv2
 import numpy as np
 import  dlib
+import firebase_admin
+
 from math import hypot
+from firebase_admin import credentials
+from firebase_admin import firestore
+
+cred = credentials.Certificate('./serviceAccount/straightbody-4dec9-firebase-adminsdk-nawot-ce763cf334.json')
+firebase_admin.initialize_app(cred)
+
+db = firestore.client()
 
 cap = cv2.VideoCapture(0)
 cap.set(10,210)
