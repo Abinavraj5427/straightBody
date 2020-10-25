@@ -33,13 +33,14 @@ window.onload = function fetch() {
 var data2;
 function load() {
     docRef = firestore.collection("EyeMovement").doc(String(userID));
-    docRef.get().then(function (doc) {
+    docRef.onSnapshot(function (doc) {
         const myData = doc.data();
         data2 = myData.FocusedTime;
         console.log(data2)
+        update();
     })
 
-
+    function update(){
     var ctx = document.getElementById('myChart').getContext('2d');
     var keys = [];
     var values = [];
@@ -56,14 +57,14 @@ function load() {
         data: {
             labels: keys,
             datasets: [{
-                label: 'My First dataset',
+                label: 'Posture',
                 backgroundColor: 'rgb(255, 99, 132)',
                 borderColor: 'rgb(255, 99, 132)',
                 data: values,
             }]
         },
-
         // Configuration options go here
         options: {}
     });
+}
 }
