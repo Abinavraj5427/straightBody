@@ -15,43 +15,48 @@ firebase.initializeApp(firebaseConfig);
 
 const auth = firebase.auth();
 
-function signUp(){
+function signUp() {
     var email = document.getElementById("username");
     var password = document.getElementById("password");
 
     const promise = auth.createUserWithEmailAndPassword(email.value, password.value);
-    if (promise.catch(e=> alert(e.message)));
-    else{
+    if (promise.catch(e => alert(e.message)));
+    else {
         alert("Signed Up");
     }
 
-    
+
 }
 var email
-function signIn(){
+function signIn() {
     email = document.getElementById("username");
     var password = document.getElementById("password");
 
     const promise = auth.signInWithEmailAndPassword(email.value, password.value);
-    if(promise.catch(e=> alert(e.message)));
-    else{
+
+    if (promise.catch(e => alert(e.message))) {
+
+    }
+    else {
+        window.location.href = "http://www.w3schools.com";
+        console.log("TEST");
         alert("Signed In" + email.value);
     }
 
-    
+
 }
 
-function signOut(){
+function signOut() {
     auth.signOut();
     alert("Signed out");
 }
 
-auth.onAuthStateChanged(function(user){
-    if(user){
-        window.open("webpage\dash.html");
+auth.onAuthStateChanged(function (user) {
+    if (user) {
+        
         // export {email as email}
     }
-    else{
+    else {
         //not logged in
     }
 });
