@@ -1,6 +1,8 @@
 # camera.py
 
 import cv2
+import Shoulder as sh
+import neweye as eye
 
 class VideoCamera(object):
     def __init__(self):
@@ -21,4 +23,12 @@ class VideoCamera(object):
         # so we must encode it into JPEG in order to correctly display the
         # video stream.
         ret, jpeg = cv2.imencode('.jpg', image)
+        return jpeg.tobytes()
+
+    def get_special_frame(self):
+        success, raw = self.video.read()
+        frame = sh.shoulderProcess(raw)
+        output = eye.eyeProcess(frame)
+
+        ret, jpeg = cv2.imencode('.jpg', output)
         return jpeg.tobytes()

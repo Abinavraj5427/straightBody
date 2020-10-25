@@ -1,14 +1,24 @@
 import eel
 import cv2
 import base64
+import firebase_setup
+
+from firebase_admin import credentials
+from firebase_admin import firestore
+
+
 from camera import VideoCamera
+
+
+# cred = credentials.Certificate('./serviceAccount/straightbody-4dec9-firebase-adminsdk-nawot-ce763cf334.json')
+# firebase_admin.initialize_app(cred)
 
 # Set web files folder
 eel.init('webpage')
 
 def gen(camera):
     while True:
-        frame = camera.get_frame()
+        frame = camera.get_special_frame()
         yield frame
 
 @eel.expose

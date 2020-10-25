@@ -2,18 +2,17 @@ import cv2
 import numpy as np
 import  dlib
 import firebase_admin
-
+# import firebase_setup
 from math import hypot
+
 from firebase_admin import credentials
 from firebase_admin import firestore
 
-cred = credentials.Certificate('./serviceAccount/straightbody-4dec9-firebase-adminsdk-nawot-ce763cf334.json')
-firebase_admin.initialize_app(cred)
 
 db = firestore.client()
 
-cap = cv2.VideoCapture(0)
-cap.set(10,210)
+# cap = cv2.VideoCapture(0)
+# cap.set(10,210)
 detector = dlib.get_frontal_face_detector()
 predictor = dlib.shape_predictor(r"./shape_predictor_68_face_landmarks.dat")
 
@@ -21,8 +20,7 @@ def midpoint(p1, p2):
     return int((p1.x + p2.x)/2), int((p1.y + p2.y)/2)
 
 font = cv2.FONT_HERSHEY_COMPLEX
-counter = 0
-time_counter = 0
+
 def get_blinking_ratio(eye_point, facial_landmarks):
     left_point = (facial_landmarks.part(eye_point[0]).x, facial_landmarks.part(eye_point[0]).y)
     right_point = (facial_landmarks.part(eye_point[3]).x, facial_landmarks.part(eye_point[3]).y)
@@ -39,7 +37,7 @@ def get_blinking_ratio(eye_point, facial_landmarks):
     ratio = (hor_line_length/ver_line_length)
     return ratio
 
-def get_gaze_ratio(eye_points, facial_landmarks):
+def get_gaze_ratio(frame, eye_points, facial_landmarks, gray):
     left_eye_region = np.array([(facial_landmarks.part(eye_points[0]).x, facial_landmarks.part(eye_points[0]).y),
                                 (facial_landmarks.part(eye_points[1]).x, facial_landmarks.part(eye_points[1]).y),
                                 (facial_landmarks.part(eye_points[2]).x, facial_landmarks.part(eye_points[2]).y),
@@ -47,7 +45,7 @@ def get_gaze_ratio(eye_points, facial_landmarks):
                                 (facial_landmarks.part(eye_points[4]).x, facial_landmarks.part(eye_points[4]).y),
                                 (facial_landmarks.part(eye_points[5]).x, facial_landmarks.part(eye_points[5]).y)], np.int32)
         #print(left_eye_region)
-        #cv2.polylines(frame, [left_eye_region], True, (0,0,255),2)
+    cv2.polylines(frame, [left_eye_region], True, (0,0,255),2)
         
     height, width, _ = frame.shape
     mask = np.zeros((height,width), np.uint8)
@@ -74,9 +72,20 @@ def get_gaze_ratio(eye_points, facial_landmarks):
     else:
         gaze_ratio = left_side_white/right_side_white
         return gaze_ratio
-while True:
+
+
+def eyeProcess(frame):
+    Eye_ref = db.collection('EyeMovement')
+    query = Eye_ref.order_by('time', direction=firestore.Query.DESCENDING).limit(1)
+    results = query.stream()
+    last_doc = list(results)[-1].to_dict()
+
+    onScreen = False
+    counter = last_doc['contactCounter']
+    time_counter = last_doc['counter']
+    
     time_counter +=1
-    _, frame = cap.read()
+    # _, frame = cap.read()
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
     faces = detector(gray)
@@ -90,8 +99,8 @@ while True:
         right_eye_ratio = get_blinking_ratio([36,37,38,39,40,41], landmarks)
         left_eye_ratio = get_blinking_ratio([42,43,44,45,46,47], landmarks)
         
-        #if left_eye_ratio > 5.4 and right_eye_ratio > 5.7:
-        #    cv2.putText(frame, "Blinking", (50,150), font, 4, (255,0,0))
+        if left_eye_ratio > 5.4 and right_eye_ratio > 5.7:
+           cv2.putText(frame, "Blinking", (50,150), font, 4, (255,0,0))
 
         #GAZE DECTECTION CODE
         
@@ -107,31 +116,47 @@ while True:
        
 
         #cv2.imshow("Eye", eye)
-        gaze_ratio_left_eye= get_gaze_ratio([36,37,38,39,40,41], landmarks)
-        gaze_ratio_right_eye = get_gaze_ratio([42,43,44,45,46,47], landmarks)
+        gaze_ratio_left_eye= get_gaze_ratio(frame, [36,37,38,39,40,41], landmarks, gray)
+        gaze_ratio_right_eye = get_gaze_ratio(frame, [42,43,44,45,46,47], landmarks, gray)
         gaze_ratio = (gaze_ratio_right_eye+gaze_ratio_left_eye)/2
         #cv2.putText(frame, str(gaze_ratio_left_eye), (50,100), font, 2, (0,0,255),3)
         cv2.putText(frame, str(gaze_ratio), (450,475), font, .75, (255,0,0),3)
         if gaze_ratio >= .77 and gaze_ratio <= .95:
+            onScreen = True
             counter+=1
-        #x =  landmarks.part(36).x
-        #y = landmarks.part(36).y
-        #cv2.circle(frame, (x,y), 3, (0,0,255),2)
+        else:
+            onScreen = False
+        # x =  landmarks.part(36).x
+        # y = landmarks.part(36).y
+        # cv2.circle(frame, (x,y), 3, (0,0,255),2)
         
     
 
-    cv2.imshow("Frame",frame)
-    print(counter, time_counter)
+    # cv2.imshow("Frame",frame)
+    # print(counter, time_counter)
+
+    # Eye_ref = db.collection('EyeMovement')
+    # query = Eye_ref.order_by('time', direction=firestore.Query.DESCENDING).limit(1)
+    # results = query.stream()
+    # last_doc = list(results)[-1].to_dict()
+
+    doc_ref = db.collection('EyeMovement').document(str(last_doc['id']+1))
+    doc_ref.set({
+        'contactCounter': counter,
+        'counter': time_counter,
+        'time': firestore.SERVER_TIMESTAMP,
+        'id': last_doc['id']+1,
+        'onScreen': onScreen,
+
+     })
     key = cv2.waitKey(1)
 
-    
-    if cv2.waitKey(1) & 0xFF == ord('q'):
-            break
+    return frame
+    # if cv2.waitKey(1) & 0xFF == ord('q'):
+    #         break
     #if key == 27:
         #break
 
-cap.release()
-cv2.destroyAllWindows()
 
 
 
