@@ -1,6 +1,17 @@
 import cv2
+import firebase_admin
+
 import numpy as py
-import firebase
+from firebase_admin import credentials
+from firebase_admin import firestore
+
+
+cred = credentials.Certificate('./serviceAccount/straightbody-4dec9-firebase-adminsdk-nawot-ce763cf334.json')
+firebase_admin.initialize_app(cred)
+
+db = firestore.client()
+
+
 
 cap = cv2.VideoCapture(0)
 hue = [0, 255]
@@ -22,9 +33,7 @@ max_ratio = 1000
 area = 0
 total = 0
 
-db = firebase.get_db()
-fb = firebase.get_firebase()
-fs = firebase.get_firestore()
+
 while True:
     doccount = 0
     ret, raw = cap.read()
@@ -81,17 +90,41 @@ while True:
         # if (max_left_point < contour[i][0]):
         #     max_left_point = contour[i][0]
 
+    #Postures_ref = db.collection('Postures').document('test')
 
+    # doc_ref.set({
+    #     'area': 500,
+    #     'average': 600,
+    #     'time': firestore.SERVER_TIMESTAMP,
+    #     'total': 40,
+    # })
     #print(contour)
-    docs = db.collection(u'Postures').stream()
-    Postures_ref = db.collection(u'Postures')
-    query = Postures_ref.order_by(
-        u'Postures', direction=fs.Query.DESCENDING).limit(1).get()
+    # docs = db.collection(u'Postures').stream()
+    # Postures_ref = db.collection(u'Postures').document(u'1')
+    # Postures_ref.set({
+    #     u'area': 200,
+    #     u'average': 500,
+    #     u'time': fb.database.ServerValue.TIMESTAMP,
+    #     u'total': 10,
+    #
+    # })
+    Postures_ref = db.collection('Postures')
+    query = Postures_ref.order_by('time', direction=firestore.Query.DESCENDING).limit(1)
+    results = query.stream()
+    print("Query")
+    print(query)
+    print(results)
+    last_doc = list(results)[-1].to_dict()
+    print(last_doc)
+    doc_ref = db.collection('Postures').document(str(last_doc['total']))
+    doc_ref.set({
+        'area': area,
+        'average': (last_doc['total']*last_doc['average']+area)/(last_doc['total']+1),
+        'time': firestore.SERVER_TIMESTAMP,
+        'total': last_doc['total']+1,
 
-    print("lastdoc")
-    for lastdoc in query:
-        print(lastdoc.to_dict())
-        print(lastdoc.id)
+     })
+
 
     cv2.imshow("Frame", frame)
     cv2.imshow("Threshold", threshold)
