@@ -20,9 +20,12 @@ function signUp(){
     var password = document.getElementById("password");
 
     const promise = auth.createUserWithEmailAndPassword(email.value, password.value);
-    promise.catch(e=> alert(e.message));
+    if (promise.catch(e=> alert(e.message)));
+    else{
+        alert("Signed Up");
+    }
 
-    alert("Signed Up");
+    
 }
 
 function signIn(){
@@ -30,13 +33,24 @@ function signIn(){
     var password = document.getElementById("password");
 
     const promise = auth.signInWithEmailAndPassword(email.value, password.value);
-    promise.catch(e=> alert(e.message));
+    if(promise.catch(e=> alert(e.message)));
+    else{
+        alert("Signed In" + email.value);
+    }
 
-    alert("Signed In" + email);
+    
 }
 
 function signOut(){
     auth.signOut();
     alert("Signed out");
-
 }
+
+auth.onAuthStateChanged(function(user){
+    if(user){
+        //we have a user that is logged in
+    }
+    else{
+        //not logged in
+    }
+});
