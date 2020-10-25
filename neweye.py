@@ -6,7 +6,7 @@ from math import hypot
 cap = cv2.VideoCapture(0)
 
 detector = dlib.get_frontal_face_detector()
-predictor = dlib.shape_predictor(r"C:/Users/drajc/OneDrive/Desktop/straightBody/shape_predictor_68_face_landmarks.dat")
+predictor = dlib.shape_predictor(r"./shape_predictor_68_face_landmarks.dat")
 
 def midpoint(p1, p2):
     return int((p1.x + p2.x)/2), int((p1.y + p2.y)/2)
@@ -103,7 +103,7 @@ while True:
         gaze_ratio = (gaze_ratio_right_eye+gaze_ratio_left_eye)/2
         #cv2.putText(frame, str(gaze_ratio_left_eye), (50,100), font, 2, (0,0,255),3)
         cv2.putText(frame, str(gaze_ratio), (50,150), font, 2, (0,0,255),3)
-        if gaze_ratio >= .85 and gaze_ratio <= 2.2:
+        if gaze_ratio >= .57 and gaze_ratio <= 2.9:
             counter+=1
         #x =  landmarks.part(36).x
         #y = landmarks.part(36).y
