@@ -32,16 +32,13 @@ function signIn() {
     email = document.getElementById("username");
     var password = document.getElementById("password");
 
-    const promise = auth.signInWithEmailAndPassword(email.value, password.value);
-
-    if (promise.catch(e => alert(e.message))) {
-
-    }
-    else {
-        window.location.href = "http://www.w3schools.com";
-        console.log("TEST");
-        alert("Signed In" + email.value);
-    }
+    auth.signInWithEmailAndPassword(email.value, password.value)
+    .then(res => {
+        console.log(res);
+        console.log("Signed In" + email.value);
+        window.location.href = "./dash.html";
+    })
+    .catch(e => {console.log(e)});
 
 
 }
