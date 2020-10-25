@@ -105,9 +105,10 @@ def shoulderProcess(raw):
      })
 
 
-    # cv2.imshow("Frame", frame)
-    # cv2.imshow("Threshold", threshold)
-    # cv2.imshow("Contours", contour)
+
+    #cv2.imshow("Frame", frame)
+    #cv2.imshow("Threshold", threshold)
+    #cv2.imshow("Contours", contour)
     # data = {
     #     u'area': area,
     #     u'average': average,
