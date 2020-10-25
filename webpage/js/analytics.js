@@ -22,11 +22,13 @@ window.onload = function load() {
     var keys = [];
     var values = [];
 
-    const events = firebase.firestore().collection('Postures')
+    var count = 0;
+    var events = firebase.firestore().collection('Postures')
+    events = events.orderBy('time', 'desc').limit(10);
     events.get().then((querySnapshot) => {
         const tempDoc = []
         querySnapshot.forEach((doc) => {
-            keys.push(doc.data().time);
+            keys.push(count++);
             values.push(doc.data().area);
             tempDoc.push({ id: doc.id, ...doc.data() })
         })
@@ -57,11 +59,13 @@ window.onload = function load() {
     keys2 = []
     values2 = []
 
-    const events2 = firebase.firestore().collection('EyeMovement')
+    count = 0;
+    var events2 = firebase.firestore().collection('EyeMovement')
+    events2 = events2.orderBy('time', 'desc').limit(10);
     events2.get().then((querySnapshot) => {
         const tempDoc = []
         querySnapshot.forEach((doc) => {
-            keys2.push(doc.data().time);
+            keys2.push(count++);
             if (doc.data().onScreen == false) {
                 values2.push(0);
             }
@@ -92,10 +96,9 @@ window.onload = function load() {
             // Configuration options go here
             options: {
                 xAxes: [{
-                    type: 'time',
                     ticks: {
                         autoSkip: true,
-                        maxTicksLimit: 10
+                        maxTicksLimit: 5
                     }
                 }]
             }
@@ -123,7 +126,6 @@ window.onload = function load() {
             data: {
                 labels: ["Total Concentration"],
                 datasets: [{
-
                     data: [20, 10],
                     backgroundColor: ['rgb(131,142,211)', 'rgb(9, 8, 61)'],
                     borderColor: ['rgb(131, 142, 211)', 'rgb(9, 8, 61)']
