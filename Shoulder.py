@@ -27,11 +27,12 @@ min_ratio = 0
 max_ratio = 1000
 # max_left_point = 0
 # max_right_point = 0
-area = 0
+
 total = 0
 
 
 def shoulderProcess(raw):
+    area = 0
 # while True:
     doccount = 0
     # ret, raw = cap.read()
@@ -77,6 +78,7 @@ def shoulderProcess(raw):
     max_contour_index = 0
     for i in range(len(contournew)):
         if max_contour < len(contournew[i]):
+            max_contour = len(contournew[i])
             max_contour_index = i
 
     if(len(contournew) > 0):
