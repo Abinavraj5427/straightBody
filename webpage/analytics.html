@@ -1,37 +1,47 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Straight Body</title>
 
-        <!-- CSS -->
-        <link href="https://fonts.googleapis.com/css2?family=Suez+One&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="./css/styles.css">
-        <link rel="stylesheet" href="./css/analytics.css">
+<head>
+    <title>Straight Body</title>
+    <!-- CSS -->
+    <script src="https://www.gstatic.com/firebasejs/7.24.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.24.0/firebase-firestore.js"></script>
 
-        <!-- JavaScript -->
-        <script type="text/javascript" src="./eel.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Suez+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/styles.css">
+    <link rel="stylesheet" href="./css/analytics.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <!-- JavaScript -->
+    <script type="text/javascript" src="./eel.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 
-    </head>
+</head>
+
+
+<body>
     
-    <body>
-        <div class="topnav">
-            <a href="dash.html">Dashboard</a>
-            <a href="analytics.html">Analytics</a>
+    <div class="topnav">
+        <a href="dash.html">Dashboard</a>
+        <a href="analytics.html">Analytics</a>
+    </div>
+    <canvas id="myChart"></canvas>
+    <div class="page">
+        <h1>Analytics</h1>
+        <h3 id = "titleName"></h3>        
+        <button onclick="load()">button</button>
+        <div class="postbox">
+            <p>Total Posture Alerts</p>
         </div>
-        <div class="page">
-            <h1>Analytics</h1>
+        
+    <script src = "js\analytics.js"></script>
+        
+    </div>
+    
+</body>
 
-            <!-- <canvas id="myChart" width="400" height="400"></canvas> -->
 
-            <div class="postbox">
-                <p>Total Posture Alerts</p>
-            </div>
+<footer>
+    <script type="text/javascript" src="./js/analytics.js"></script>
+</footer>
 
-        </div>
-    </body>
-
-    <footer>
-        <script type="text/javascript" src="./js/analytics.js"></script>
-    </footer>
 </html>
