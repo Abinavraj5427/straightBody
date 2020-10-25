@@ -12,7 +12,8 @@ def midpoint(p1, p2):
     return int((p1.x + p2.x)/2), int((p1.y + p2.y)/2)
 
 font = cv2.FONT_HERSHEY_COMPLEX
-
+counter = 0
+time_counter = 0
 def get_blinking_ratio(eye_point, facial_landmarks):
     left_point = (facial_landmarks.part(eye_point[0]).x, facial_landmarks.part(eye_point[0]).y)
     right_point = (facial_landmarks.part(eye_point[3]).x, facial_landmarks.part(eye_point[3]).y)
@@ -31,6 +32,7 @@ def get_blinking_ratio(eye_point, facial_landmarks):
     
 
 while True:
+    time_counter +=1
     _, frame = cap.read()
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
@@ -55,7 +57,7 @@ while True:
                                     (landmarks.part(39).x, landmarks.part(39).y),
                                     (landmarks.part(40).x, landmarks.part(40).y),
                                     (landmarks.part(41).x, landmarks.part(41).y)], np.int32)
-        print(left_eye_region)
+        #print(left_eye_region)
         #cv2.polylines(frame, [left_eye_region], True, (0,0,255),2)
         
         height, width, _ = frame.shape
@@ -72,25 +74,40 @@ while True:
         gray_eye = left_eye[min_y:max_y, min_x: max_x]
         #gray_eye = cv2.cvtColor(eye, cv2.COLOR_BGR2GRAY)
         _, threshold_eye = cv2.threshold(gray_eye, 70, 255, cv2.THRESH_BINARY)
+        height, width = threshold_eye.shape
+        left_side_threshold = threshold_eye[0: height, 0: int(width/2)]
+        left_side_white = cv2.countNonZero(left_side_threshold)
+
+        right_side_threshold = threshold_eye[0: height, int(width/2):width]
+        right_side_white = cv2.countNonZero(right_side_threshold)
+        if (right_side_white < 54 and right_side_white >= 5) and (left_side_white < 85 and left_side_white >= 35):
+            counter+=1
+        cv2.putText(frame, str(left_side_white), (50,100), font, 2, (0,0,255),3)
+        cv2.putText(frame, str(right_side_white), (50,150), font, 2, (0,0,255),3)
 
         eye = cv2.resize(gray_eye, None, fx=6, fy=6)
         threshold_eye = cv2.resize(threshold_eye, None, fx=6, fy=6)
 
-        cv2.imshow("Eye", eye)
+        #cv2.imshow("Eye", eye)
         cv2.imshow("Threshold", threshold_eye)
+        cv2.imshow("left", left_side_threshold)
+        cv2.imshow("right", right_side_threshold)
         cv2.imshow("Right Eye", left_eye)
         #x =  landmarks.part(36).x
         #y = landmarks.part(36).y
         #cv2.circle(frame, (x,y), 3, (0,0,255),2)
-
+        
     
 
     cv2.imshow("Frame",frame)
-
+    print(counter, time_counter)
     key = cv2.waitKey(1)
 
-    if key == 27:
-        break
+    
+    if cv2.waitKey(1) & 0xFF == ord('q'):
+            break
+    #if key == 27:
+        #break
 
 cap.release()
 cv2.destroyAllWindows()
