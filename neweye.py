@@ -19,8 +19,8 @@ def get_blinking_ratio(eye_point, facial_landmarks):
     center_top = midpoint(facial_landmarks.part(eye_point[1]), facial_landmarks.part(eye_point[2]))
     center_bottom = midpoint(facial_landmarks.part(eye_point[5]), facial_landmarks.part(eye_point[4]))
 
-    hor_line = cv2.line(frame, left_point, right_point, (0,255,0),2)
-    ver_line = cv2.line(frame, center_top, center_bottom, (0,255,0), 2)
+    #hor_line = cv2.line(frame, left_point, right_point, (0,255,0),2)
+    #ver_line = cv2.line(frame, center_top, center_bottom, (0,255,0), 2)
 
     hor_line_length = hypot((left_point[0]-right_point[0]), (left_point[1]- right_point[1]))
     ver_line_length = hypot((center_top[0]- center_bottom[0]), (center_top[1] - center_bottom[1]))
@@ -45,7 +45,7 @@ while True:
         right_eye_ratio = get_blinking_ratio([36,37,38,39,40,41], landmarks)
         left_eye_ratio = get_blinking_ratio([42,43,44,45,46,47], landmarks)
         
-        if left_eye_ratio > 5.7 and right_eye_ratio > 5.7:
+        if left_eye_ratio > 5.4 and right_eye_ratio > 5.7:
             cv2.putText(frame, "Blinking", (50,150), font, 4, (255,0,0))
 
         #GAZE DECTECTION CODE
@@ -63,8 +63,14 @@ while True:
         max_y = np.max(left_eye_region[:, 1])
 
         eye = frame[min_y:max_y, min_x: max_x]
+        gray_eye = cv2.cvtColor(eye, cv2.COLOR_BGR2GRAY)
+        _, threshold_eye = cv2.threshold(gray_eye, 70, 255, cv2.THRESH_BINARY)
+
+        eye = cv2.resize(eye, None, fx=6, fy=6)
+        threshold_eye = cv2.resize(threshold_eye, None, fx=6, fy=6)
 
         cv2.imshow("Eye", eye)
+        cv2.imshow("Threshold", threshold_eye)
         #x =  landmarks.part(36).x
         #y = landmarks.part(36).y
         #cv2.circle(frame, (x,y), 3, (0,0,255),2)
