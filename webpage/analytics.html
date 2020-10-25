@@ -27,38 +27,64 @@
         </div>
         
 
-        <div class="page">
-            <br></br>
-            <h1>ANALYTICS</h1>
-        
+<head>
+    <title>Straight Body</title>
+
+    <!-- CSS -->
+    <script src="main.dart.js" type="application/javascript"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-app.js"></script>
+    <script src ="https://www.gstatic.com/firebasejs/7.15.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-auth.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Suez+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/styles.css">
+    <link rel="stylesheet" href="./css/analytics.css">
+    <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.7/css/all.css"> -->
+    <!-- JavaScript -->
+    <script type="text/javascript" src="./eel.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
+
+</head>
+
+<body>
+
+    <div class="topnav">
+        <a href="dash.html">Dashboard</a>
+        <a href="analytics.html">Analytics</a>
+    </div>
+
+    <div class="page">
+        <br></br>
+        <h1>ANALYTICS</h1>
+
         <div class="postchart">
             <canvas id="myChart"></canvas>
             <script>
-                var ctx = document.getElementById('myChart').getContext('2d');
-                var mychart = new Chart(ctx, {
-                    // The type of chart we want to create
-                    type: 'line',
+                // var ctx = document.getElementById('myChart').getContext('2d');
+                // var mychart = new Chart(ctx, {
+                //     // The type of chart we want to create
+                //     type: 'line',
 
-                    // The data for our dataset
-                    data: {
-                        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-                        datasets: [{
-                            label: 'POSTURE AREA',
-                            backgroundColor: 'rgb(255, 99, 132)',
-                            borderColor: 'rgb(255, 99, 132)',
-                            data: [0, 10, 5, 2, 20, 30, 45]
-                        }]
-                    },
+                //     // The data for our dataset
+                //     data: {
+                //         labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+                //         datasets: [{
+                //             label: 'POSTURE AREA',
+                //             backgroundColor: 'rgb(255, 99, 132)',
+                //             borderColor: 'rgb(255, 99, 132)',
+                //             data: [0, 10, 5, 2, 20, 30, 45]
+                //         }]
+                //     },
 
-                    // Configuration options go here
-                    options: {}
-                });
+                //     // Configuration options go here
+                //     options: {}
+                // });
             </script>
         </div>
 
         <div class="concchart">
-            <canvas id="urChart"></canvas>
-            <script>
+            <canvas id="otherChart"></canvas>
+            <!-- <script>
                 var sec = document.getElementById('urChart').getContext('2d');
                 var urchart = new Chart(sec, {
                     // The type of chart we want to create
@@ -78,12 +104,12 @@
                     // Configuration options go here
                     options: {}
                 });
-            </script>
+            </script> -->
         </div>
 
         <div class="pichart">
             <canvas id="concpi"></canvas>
-            <script>
+            <!-- <script>
                 var thi = document.getElementById('concpi').getContext('2d');
                 var concpi = new Chart(thi, {
                     // The type of chart we want to create
@@ -103,7 +129,7 @@
                     // Configuration options go here
                     options: {}
                 });
-            </script>
+            </script> -->
 
         </div>
 
