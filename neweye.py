@@ -83,7 +83,6 @@ def eyeProcess(frame):
     onScreen = False
     counter = last_doc['contactCounter']
     time_counter = last_doc['counter']
-    
     time_counter +=1
     # _, frame = cap.read()
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
@@ -133,7 +132,7 @@ def eyeProcess(frame):
     
 
     # cv2.imshow("Frame",frame)
-    # print(counter, time_counter)
+    print(counter, time_counter)
 
     # Eye_ref = db.collection('EyeMovement')
     # query = Eye_ref.order_by('time', direction=firestore.Query.DESCENDING).limit(1)
