@@ -28,7 +28,7 @@ function signUp(){
     
 }
 var email
-window.onload = function signIn(){
+function signIn(){
     email = document.getElementById("username");
     var password = document.getElementById("password");
 
@@ -48,7 +48,8 @@ function signOut(){
 
 auth.onAuthStateChanged(function(user){
     if(user){
-        export {email as email}
+        window.open("webpage\dash.html");
+        // export {email as email}
     }
     else{
         //not logged in
