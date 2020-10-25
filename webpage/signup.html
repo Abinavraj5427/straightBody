@@ -12,10 +12,6 @@
 <head>
   <!-- The core Firebase JS SDK is always required and must be listed first -->
   <script src="https://www.gstatic.com/firebasejs/7.24.0/firebase-app.js"></script>
-        <!-- CSS -->
-        <link href="https://fonts.googleapis.com/css2?family=Suez+One&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="./css/styles.css">
-        <link rel="stylesheet" href="./css/index.css">
 
   <!-- TODO: Add SDKs for Firebase products that you want to use
      https://firebase.google.com/docs/web/setup#available-libraries -->
@@ -28,17 +24,9 @@
 
 <title>straightBody</title>
 
-
 <!-- CSS -->
 <link rel="stylesheet" href="/css/styles.css">
 <link rel="stylesheet" href="/css/index.css">
-
-        <!-- JavaScript -->
-        <script type="text/javascript" src="./eel.js"></script>
-        <script type="text/javascript" src="./js/index.js"></script>
-    </head>
-    
-    <title>straightBody</title>
 
 <!-- JavaScript -->
 <script type="text/javascript" src="/eel.js"></script>
@@ -51,27 +39,16 @@
   <script src=js\login.js></script>
   <h1>Welcome to Straight Body</h1>
   <h5>
-    Enter your email
+      Enter an email
   </h5>
   <input type="text" placeholder="Email Address" id="username" />
   <h5>
-    Password
-  </h5>
+    Choose a password
+</h5>
 
   <input type="password" placeholder="Password" id="password" />
   <p> Secured by Google Firebase</p>
-  <p>
-    <button onclick="signIn()">Sign In</button>
-    <br>
-  </p>
-
-  <br>
-  <h4>
-    Don't have an account?
-  </h4>
-  <p>
-    <button><a href="signup.html">Sign Up</a></button>
-  </p>
+    <button onclick="signUp()">Sign Up</button>
 
   <!--<button onclick="signOut()">Log out</button>-->
 
