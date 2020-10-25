@@ -17,7 +17,8 @@ max_vertices = 18000
 min_vertices = 0
 min_ratio = 0
 max_ratio = 1000
-
+max_left_point = 0
+max_right_point = 0
 while True:
     ret, imgorg = cap.read()
     frame = cv2. cvtColor(imgorg, cv2.COLOR_BGR2HSV)
@@ -28,7 +29,16 @@ while True:
     _, threshold = cv2.threshold(frame, 12, 255, cv2.THRESH_BINARY_INV)
 
     contours, _ = cv2.findContours(threshold, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
-    print(len(contours))
+    #print(len(contours))
+    for contour in contours:
+        for i in range(len(contour)):
+            print(contour[i][0])
+            #if (max_left_point < contour[i][0]):
+                #max_left_point = contour[i][0]
+
+
+            print(contour)
+
     #input_contours = contours
     #output = []
     # for contour in input_contours:
@@ -56,8 +66,8 @@ while True:
     #
     # print(contournew)
 
-    print("SHAPE")
-    print(imgorg.shape)
+    #print("SHAPE")
+    #print(imgorg.shape)
     contour = cv2.drawContours(imgorg, contours, -1, (0, 0, 255), 3)
 
 
