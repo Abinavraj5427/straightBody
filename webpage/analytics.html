@@ -1,50 +1,145 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Straight Body</title>
 
-        <!-- CSS -->
-    
-        <link href="https://fonts.googleapis.com/css2?family=Suez+One&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="./css/styles.css">
-        <link rel="stylesheet" href="./css/analytics.css">
-        <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.7/css/all.css"> -->
-        <!-- JavaScript -->
-        <script type="text/javascript" src="./eel.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+<head>
+    <title>Straight Body</title>
 
-    </head>
-    
-    <body>
+    <!-- CSS -->
 
-        <div class="topnav">
-            <a href="dash.html">Dashboard</a>
-            <a href="analytics.html">Analytics</a>
+    <link href="https://fonts.googleapis.com/css2?family=Suez+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/styles.css">
+    <link rel="stylesheet" href="./css/analytics.css">
+    <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.7/css/all.css"> -->
+    <!-- JavaScript -->
+    <script type="text/javascript" src="./eel.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
+
+</head>
+
+<body>
+
+    <div class="topnav">
+        <a href="dash.html">Dashboard</a>
+        <a href="analytics.html">Analytics</a>
+    </div>
+
+    <div class="page">
+        <br></br>
+        <h1>ANALYTICS</h1>
+
+        <div class="postchart">
+            <canvas id="myChart"></canvas>
+            <script>
+                var ctx = document.getElementById('myChart').getContext('2d');
+                var mychart = new Chart(ctx, {
+                    // The type of chart we want to create
+                    type: 'line',
+
+                    // The data for our dataset
+                    data: {
+                        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+                        datasets: [{
+                            label: 'POSTURE AREA',
+                            backgroundColor: 'rgb(255, 99, 132)',
+                            borderColor: 'rgb(255, 99, 132)',
+                            data: [0, 10, 5, 2, 20, 30, 45]
+                        }]
+                    },
+
+                    // Configuration options go here
+                    options: {}
+                });
+            </script>
         </div>
-    
-        <div class="page">
-            <h1>ANALYTICS</h1>
 
-            <!-- <canvas id="myChart" width="400" height="400"></canvas> -->         
-            <div class="postbox">
-                <div class="pal">
+        <div class="concchart">
+            <canvas id="urChart"></canvas>
+            <script>
+                var sec = document.getElementById('urChart').getContext('2d');
+                var urchart = new Chart(sec, {
+                    // The type of chart we want to create
+                    type: 'line',
+
+                    // The data for our dataset
+                    data: {
+                        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+                        datasets: [{
+                            label: 'CONCENTRATION',
+                            backgroundColor: 'rgb(255, 99, 132)',
+                            borderColor: 'rgb(255, 99, 132)',
+                            data: [0, 10, 5, 2, 20, 30, 45]
+                        }]
+                    },
+
+                    // Configuration options go here
+                    options: {}
+                });
+            </script>
+        </div>
+
+        <div class="pichart">
+            <canvas id="concpi"></canvas>
+            <script>
+                var thi = document.getElementById('concpi').getContext('2d');
+                var concpi = new Chart(thi, {
+                    // The type of chart we want to create
+                    type: 'doughnut',
+
+                    // The data for our dataset
+                    data: {
+                        labels: ["Total Concentration"],
+                        datasets: [{
+
+                            data: [20, 10],
+                            backgroundColor: ['rgb(131,142,211)', 'rgb(9, 8, 61)'],
+                            borderColor: ['rgb(131, 142, 211)', 'rgb(9, 8, 61)']
+                        }]
+                    },
+
+                    // Configuration options go here
+                    options: {}
+                });
+            </script>
+
+        </div>
+
+
+
+
+        <!-- <canvas id="myChart" width="400" height="400"></canvas> -->
+
+
+        <div class="postbox">
+            <div class="pal">
                 <p>POSTURE ALERTS</p>
-                </div>
-                <script type="text/javascript">
-                    var postvar= 50;
-                    document.getElementsByTagName('postbox')[0].innerHTML=postvar;
-                </script>
             </div>
-            <div class="screenbox">
-                <div class="sct">
+            <p id="pal1">~</p>
+            <script type="text/javascript">
+                var postvar = 50;
+                document.getElementById('pal1').innerHTML = postvar;
+            </script>
+        </div>
+        <div class="screenbox">
+            <div class="sct">
                 <p>SCREEN TIME</p>
-                </div>
             </div>
-            <div class="breakbox">
-                <div class="nbr">
+            <p id="sct1">~</p>
+            <script type="text/javascript">
+                var screenvar = 50;
+                document.getElementById('sct1').innerHTML = screenvar;
+            </script>
+        </div>
+        <div class="breakbox">
+            <div class="nbr">
                 <p>NEXT BREAK</p>
-                </div>
             </div>
+            <p id="nbr1">~</p>
+            <script type="text/javascript">
+                var breakvar = 50;
+                document.getElementById('nbr1').innerHTML = breakvar;
+            </script>
+        </div>
 
 
 </body>
