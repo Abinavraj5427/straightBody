@@ -13,6 +13,7 @@
         <script type="text/javascript" src="./eel.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 
+
     </head>
     
     <body>
@@ -24,21 +25,92 @@
         <div class="page">
             <br></br>
             <h1>ANALYTICS</h1>
+        
+        <div class="postchart">
+            <canvas id="myChart"></canvas>
+            <script>
+                var ctx = document.getElementById('myChart').getContext('2d');
+var mychart = new Chart(ctx, {
+    // The type of chart we want to create
+    type: 'line',
 
-            <!-- <canvas id="myChart" width="400" height="400"></canvas> -->
+    // The data for our dataset
+    data: {
+        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+        datasets: [{
+            label: 'POSTURE AREA',
+            backgroundColor: 'rgb(255, 99, 132)',
+            borderColor: 'rgb(255, 99, 132)',
+            data: [0, 10, 5, 2, 20, 30, 45]
+        }]
+    },
 
-           <div class="area">
-                <button onclick="append();">Append Point</button>
-                <button onclick="restart();">Restart</button>
-                <button onclick="reset();">Reset</button>
-            </div>
-                <script src="./1/analytics.js"></script>
+    // Configuration options go here
+    options: {}
+});
+            </script>
+        </div>
+
+        <div class="concchart">
+            <canvas id="urChart"></canvas>
+            <script>
+                var sec = document.getElementById('urChart').getContext('2d');
+var urchart = new Chart(sec, {
+    // The type of chart we want to create
+    type: 'line',
+
+    // The data for our dataset
+    data: {
+        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+        datasets: [{
+            label: 'CONCENTRATION',
+            backgroundColor: 'rgb(255, 99, 132)',
+            borderColor: 'rgb(255, 99, 132)',
+            data: [0, 10, 5, 2, 20, 30, 45]
+        }]
+    },
+
+    // Configuration options go here
+    options: {}
+});
+            </script>
+        </div>
+
+        <div class="pichart">
+            <canvas id="concpi"></canvas>
+            <script>
+                var thi = document.getElementById('concpi').getContext('2d');
+var concpi = new Chart(thi, {
+    // The type of chart we want to create
+    type: 'doughnut',
+
+    // The data for our dataset
+    data: {
+        labels: ["Total Concentration"],
+        datasets: [{
+            
+            data: [20,10],
+            backgroundColor: ['rgb(131,142,211)', 'rgb(9, 8, 61)'],
+            borderColor: ['rgb(131, 142, 211)', 'rgb(9, 8, 61)']
+        }]
+    },
+
+    // Configuration options go here
+    options: {}
+});
+            </script>
+            
+        </div>
+
+
+
+
+
 
             <div class="postbox">
                 <div class="pal">
                 <p>POSTURE ALERTS</p>
                 </div>
-                
                 <p id="pal1">~</p>
                 <script type="text/javascript">
                     var postvar= 50;

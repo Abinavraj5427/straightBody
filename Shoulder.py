@@ -1,8 +1,16 @@
 import cv2
-import numpy as py
-import firebase
+import firebase_admin
 
-cap = cv2.VideoCapture(0)
+
+from firebase_admin import credentials
+from firebase_admin import firestore
+
+import numpy as py
+# import firebase_setup
+
+
+db = firestore.client()
+# cap = cv2.VideoCapture(0)
 hue = [0, 255]
 sat = [0, 255]
 val = [0, 110]
@@ -22,12 +30,11 @@ max_ratio = 1000
 area = 0
 total = 0
 
-db = firebase.get_db()
-fb = firebase.get_firebase()
-fs = firebase.get_firestore()
-while True:
+
+def shoulderProcess(raw):
+# while True:
     doccount = 0
-    ret, raw = cap.read()
+    # ret, raw = cap.read()
     imgorg = raw.copy()
     frame = cv2. cvtColor(imgorg, cv2.COLOR_BGR2HSV)
     frame = cv2.inRange(frame, (hue[0], sat[0], val[0]), (hue[1], sat[1], val[1]))
@@ -76,26 +83,28 @@ while True:
         largest_contour = contournew[max_contour_index]
         area = cv2.contourArea(largest_contour)
         print(area)
-    # for i in range(len(largest_contour)):
-        # print(contour[i][0])
-        # if (max_left_point < contour[i][0]):
-        #     max_left_point = contour[i][0]
+
+    Postures_ref = db.collection('Postures')
+    query = Postures_ref.order_by('time', direction=firestore.Query.DESCENDING).limit(1)
+    results = query.stream()
+    print("Query")
+    print(query)
+    print(results)
+    last_doc = list(results)[-1].to_dict()
+    print(last_doc)
+    doc_ref = db.collection('Postures').document(str(last_doc['total']))
+    doc_ref.set({
+        'area': area,
+        'average': (last_doc['total']*last_doc['average']+area)/(last_doc['total']+1),
+        'time': firestore.SERVER_TIMESTAMP,
+        'total': last_doc['total']+1,
+
+     })
 
 
-    #print(contour)
-    docs = db.collection(u'Postures').stream()
-    Postures_ref = db.collection(u'Postures')
-    query = Postures_ref.order_by(
-        u'Postures', direction=fs.Query.DESCENDING).limit(1).get()
-
-    print("lastdoc")
-    for lastdoc in query:
-        print(lastdoc.to_dict())
-        print(lastdoc.id)
-
-    cv2.imshow("Frame", frame)
-    cv2.imshow("Threshold", threshold)
-    cv2.imshow("Contours", contour)
+    # cv2.imshow("Frame", frame)
+    # cv2.imshow("Threshold", threshold)
+    # cv2.imshow("Contours", contour)
     # data = {
     #     u'area': area,
     #     u'average': average,
@@ -106,5 +115,6 @@ while True:
     # db.collection(u'Posture').document(u'data').set(data)
     # total+=1
 
-    if cv2.waitKey(1) == ord('q'):
-        break
+    # if cv2.waitKey(1) == ord('q'):
+    #     break
+    return contour
