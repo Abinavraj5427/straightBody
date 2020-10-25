@@ -19,12 +19,13 @@ function signUp() {
     var email = document.getElementById("username");
     var password = document.getElementById("password");
 
-    const promise = auth.createUserWithEmailAndPassword(email.value, password.value);
-    if (promise.catch(e => alert(e.message)));
-    else {
-        alert("Signed Up");
-    }
-
+    auth.createUserWithEmailAndPassword(email.value, password.value)
+    .then(res => {
+        console.log(res);
+        console.log("Signed Up");
+        window.location.href = "./dash.html";
+    })
+    .catch(e => {console.log(e)});
 
 }
 var email
