@@ -1,9 +1,23 @@
 .page h1{
     text-align: center;
-    font style: Baskerville;
-    font-size:6vh;
+    font-style: Baskerville;
+    font-size: 6vh;
+    color: rgb(131,142,211);
+    font-weight: normal;
+    text-shadow: 2px 2px rgb(9,8,61);
 }
 
 body {
     height: 150vh;
+}
+
+.area {
+    position: absolute;
+    left: 5px;
+    top:5px;
+}
+
+canvas {
+    width: 100%;
+    height: 100%;
 }

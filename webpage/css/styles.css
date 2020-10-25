@@ -1,3 +1,5 @@
+@import url('../assets/type/metropolis/metropolis.css');
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -28,7 +30,7 @@
     padding-left: 4vw;
     letter-spacing: 0.2vw;
     text-indent: .2vw;
-    font-family: Baskerville;
+    font-family: metropolisbold;
     /* font-size: 1vw; */
 }
 
@@ -40,14 +42,14 @@
 
 body{
     text-align: center !important;
-    font-family: Baskerville;
+    font-family: metropolisbold;
     
 }
 
 
-h1{
+/* h1{
     margin-top: 8 vh;
-}
+} */
 
 .postbox {
     background-color: rgb(131,142,211);
@@ -67,6 +69,7 @@ h1{
     transition-timing-function: ease-in;
     transition-duration: .25s;
     border-radius: 15px;
+    
 }
 
   @keyframes flip {
@@ -95,6 +98,7 @@ h1{
     height: 400px;
     animation-duration: 4s;
 
+
 }
 .postbox:hover .pal {
     top:20px;
@@ -103,6 +107,7 @@ h1{
     width:80px;
     height: 80px;
     border-radius:50%;
+
 }
 
 
@@ -114,7 +119,16 @@ h1{
     margin-right: -50%;
     transform: translate(-50%, -50%);
     color: white;
-    font-size: 6vh;
+    font-size: 5vh;
+    
+}
+
+#pal1 {
+    position: relative;
+    top:50%;
+    left:50%;
+    color: white;
+    font-size: 12vh;
 }
 
 
@@ -175,8 +189,16 @@ h1{
     margin-right: -50%;
     transform: translate(-50%, -50%);
     color: white;
-    font-size:6vh;
+    font-size:5vh;
     
+}
+
+#sct1 {
+    position: relative;
+    top:50%;
+    left:50%;
+    color: white;
+    font-size: 12vh;
 }
 
 .breakbox {
@@ -234,21 +256,32 @@ h1{
     margin-right: -50%;
     transform: translate(-50%, -50%);
     color: white;
-    font-size: 6vh;
+    font-size: 5vh;
+}
+#nbr1 {
+    position: relative;
+    top:50%;
+    left:50%;
+    color: white;
+    font-size: 12vh;
 }
 
 .page {
     overflow:hidden;
     position: absolute;
     text-align: center;
-    width: 98%;
-    margin-top: 8.5vh;
-    margin-bottom: 1vh;
-    margin-left:1%;
-    margin-right:1%;
+    width: 97%;
+    margin-top: 10vh;
+    margin-bottom: 1.5vh;
+    margin-left:1.5%;
+    margin-right:1.5%;
     height: 148vh;
     border-style: ridge;
+    border-radius:20px;
+    border-color: rgb(131, 142, 211);
     display: relative;
+    background-color: rgb(229, 231, 247);
+    
     
    
 }
