@@ -17,27 +17,13 @@ var firestore = firebase.firestore();
 
 var user = "Shreyas";
 var docRef = firestore.collection("Users").doc(user);
-// window.onload = function fetch() {
-//     docRef.get().then(function (doc) {
-//         if (doc && doc.exists) {
-//             // console.log("test");
-//             const myData = doc.data();
-//             //document.getElementById("titleName").innerHTML = myData.FirstName;
-//             userID = myData.UserNumber;
-//         }
-//         else {
-//             console.log("error");
-//         }
-//     })
-
-// }
 
 window.onload = function load() {
     var keys = [];
     var values = [];
 
     const events = firebase.firestore().collection('Postures')
-    events.onSnapshot((querySnapshot) => {
+    events.get().then((querySnapshot) => {
         const tempDoc = []
         querySnapshot.forEach((doc) => {
             keys.push(doc.data().time);
@@ -68,16 +54,19 @@ window.onload = function load() {
         });
     }
 
+    keys2 = []
+    values2 = []
+
     const events2 = firebase.firestore().collection('EyeMovement')
-    events2.onSnapshot((querySnapshot) => {
+    events2.get().then((querySnapshot) => {
         const tempDoc = []
         querySnapshot.forEach((doc) => {
-            keys.push(doc.data().time);
-            if (doc.data().onScreen == false){
-                values.push(0);
+            keys2.push(doc.data().time);
+            if (doc.data().onScreen == false) {
+                values2.push(0);
             }
-            else{
-                values.push(1);
+            else {
+                values2.push(1);
             }
             tempDoc.push({ id: doc.id, ...doc.data() })
         })
@@ -92,18 +81,60 @@ window.onload = function load() {
             type: 'line',
             // The data for our dataset
             data: {
-                labels: keys,
+                labels: keys2,
                 datasets: [{
                     label: 'Eye Movement',
                     backgroundColor: 'rgb(255, 99, 132)',
                     borderColor: 'rgb(255, 99, 132)',
-                    data: values,
+                    data: values2,
                 }]
             },
+            // Configuration options go here
+            options: {
+                xAxes: [{
+                    type: 'time',
+                    ticks: {
+                        autoSkip: true,
+                        maxTicksLimit: 10
+                    }
+                }]
+            }
+        });
+    }
+
+    contactCounter = []
+    contact = []
+    const events3 = firebase.firestore().collection('EyeMovement')
+    events3.get().then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+            contactCounter.push(doc.data().contactCounter);
+            contact.push(doc.data().counter);
+        })
+        update3();
+    })
+
+    function update3() {
+        var thi = document.getElementById('concpi').getContext('2d');
+        var concpi = new Chart(thi, {
+            // The type of chart we want to create
+            type: 'doughnut',
+
+            // The data for our dataset
+            data: {
+                labels: ["Total Concentration"],
+                datasets: [{
+
+                    data: [20, 10],
+                    backgroundColor: ['rgb(131,142,211)', 'rgb(9, 8, 61)'],
+                    borderColor: ['rgb(131, 142, 211)', 'rgb(9, 8, 61)']
+                }]
+            },
+
             // Configuration options go here
             options: {}
         });
     }
+
 }
 
 

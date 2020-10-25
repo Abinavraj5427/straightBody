@@ -1,44 +1,15 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Straight Body</title>
-
-        <!-- CSS -->
-    
-        <link href="https://fonts.googleapis.com/css2?family=Suez+One&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="./css/styles.css">
-        <link rel="stylesheet" href="./css/analytics.css">
-        <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> -->
-        <!-- JavaScript -->
-        <script type="text/javascript" src="./eel.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-
-
-    </head>
-    
-    <body>
-        <div class="topnav">
-            <a class= "in" href="dash.html">Dashboard</a>
-            <a class= "in" href="analytics.html">Analytics</a>
-            
-        </div>
-        <div class="newtop">
-            <a class= "out" href="index.html">Logout</a>
-        </div>
-        
 
 <head>
     <title>Straight Body</title>
 
     <!-- CSS -->
-    <script src="main.dart.js" type="application/javascript"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-app.js"></script>
-    <script src ="https://www.gstatic.com/firebasejs/7.15.0/firebase-firestore.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-auth.js"></script>
+
     <link href="https://fonts.googleapis.com/css2?family=Suez+One&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./css/styles.css">
     <link rel="stylesheet" href="./css/analytics.css">
-    <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.7/css/all.css"> -->
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> -->
     <!-- JavaScript -->
     <script type="text/javascript" src="./eel.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
@@ -47,19 +18,49 @@
 </head>
 
 <body>
-
     <div class="topnav">
-        <a href="dash.html">Dashboard</a>
-        <a href="analytics.html">Analytics</a>
+        <a class="in" href="dash.html">Dashboard</a>
+        <a class="in" href="analytics.html">Analytics</a>
+
+    </div>
+    <div class="newtop">
+        <a class="out" href="index.html">Logout</a>
     </div>
 
-    <div class="page">
-        <br></br>
-        <h1>ANALYTICS</h1>
 
-        <div class="postchart">
-            <canvas id="myChart"></canvas>
-            <script>
+    <head>
+        <title>Straight Body</title>
+
+        <!-- CSS -->
+        <script src="main.dart.js" type="application/javascript"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-firestore.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-auth.js"></script>
+        <link href="https://fonts.googleapis.com/css2?family=Suez+One&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="./css/styles.css">
+        <link rel="stylesheet" href="./css/analytics.css">
+        <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.7/css/all.css"> -->
+        <!-- JavaScript -->
+        <script type="text/javascript" src="./eel.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
+
+    </head>
+
+    <body>
+
+        <div class="topnav">
+            <a href="dash.html">Dashboard</a>
+            <a href="analytics.html">Analytics</a>
+        </div>
+
+        <div class="page">
+            <br></br>
+            <h1>ANALYTICS</h1>
+
+            <div class="postchart">
+                <canvas id="myChart"></canvas>
+                <script>
                 // var ctx = document.getElementById('myChart').getContext('2d');
                 // var mychart = new Chart(ctx, {
                 //     // The type of chart we want to create
@@ -79,12 +80,12 @@
                 //     // Configuration options go here
                 //     options: {}
                 // });
-            </script>
-        </div>
+                </script>
+            </div>
 
-        <div class="concchart">
-            <canvas id="otherChart"></canvas>
-            <!-- <script>
+            <div class="concchart">
+                <canvas id="otherChart"></canvas>
+                <!-- <script>
                 var sec = document.getElementById('urChart').getContext('2d');
                 var urchart = new Chart(sec, {
                     // The type of chart we want to create
@@ -105,11 +106,11 @@
                     options: {}
                 });
             </script> -->
-        </div>
+            </div>
 
-        <div class="pichart">
-            <canvas id="concpi"></canvas>
-            <!-- <script>
+            <div class="pichart">
+                <canvas id="concpi"></canvas>
+                <!-- <script>
                 var thi = document.getElementById('concpi').getContext('2d');
                 var concpi = new Chart(thi, {
                     // The type of chart we want to create
@@ -131,51 +132,51 @@
                 });
             </script> -->
 
-        </div>
-
-
-
-
-        <!-- <canvas id="myChart" width="400" height="400"></canvas> -->
-
-
-        <div class="postbox">
-            <div class="pal">
-                <p>POSTURE ALERTS</p>
             </div>
-            <p id="pal1">~</p>
-            <script type="text/javascript">
-                var postvar = 50;
-                document.getElementById('pal1').innerHTML = postvar;
-            </script>
-        </div>
-        <div class="screenbox">
-            <div class="sct">
-                <p>SCREEN TIME</p>
+
+
+
+
+            <!-- <canvas id="myChart" width="400" height="400"></canvas> -->
+
+
+            <div class="postbox">
+                <div class="pal">
+                    <p>POSTURE ALERTS</p>
+                </div>
+                <p id="pal1">~</p>
+                <script type="text/javascript">
+                    var postvar = 50;
+                    document.getElementById('pal1').innerHTML = postvar;
+                </script>
             </div>
-            <p id="sct1">~</p>
-            <script type="text/javascript">
-                var screenvar = 50;
-                document.getElementById('sct1').innerHTML = screenvar;
-            </script>
-        </div>
-        <div class="breakbox">
-            <div class="nbr">
-                <p>NEXT BREAK</p>
+            <div class="screenbox">
+                <div class="sct">
+                    <p>SCREEN TIME</p>
+                </div>
+                <p id="sct1">~</p>
+                <script type="text/javascript">
+                    var screenvar = 50;
+                    document.getElementById('sct1').innerHTML = screenvar;
+                </script>
             </div>
-            <p id="nbr1">~</p>
-            <script type="text/javascript">
-                var breakvar = 50;
-                document.getElementById('nbr1').innerHTML = breakvar;
-            </script>
-        </div>
+            <div class="breakbox">
+                <div class="nbr">
+                    <p>NEXT BREAK</p>
+                </div>
+                <p id="nbr1">~</p>
+                <script type="text/javascript">
+                    var breakvar = 50;
+                    document.getElementById('nbr1').innerHTML = breakvar;
+                </script>
+            </div>
 
 
-</body>
+    </body>
 
 
-<footer>
-    <script type="text/javascript" src="./js/analytics.js"></script>
-</footer>
+    <footer>
+        <script type="text/javascript" src="./js/analytics.js"></script>
+    </footer>
 
 </html>
