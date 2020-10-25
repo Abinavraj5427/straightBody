@@ -103,7 +103,7 @@ while True:
         gaze_ratio = (gaze_ratio_right_eye+gaze_ratio_left_eye)/2
         #cv2.putText(frame, str(gaze_ratio_left_eye), (50,100), font, 2, (0,0,255),3)
         cv2.putText(frame, str(gaze_ratio), (450,475), font, .75, (255,0,0),3)
-        if gaze_ratio >= .70 and gaze_ratio <= .95:
+        if gaze_ratio >= .77 and gaze_ratio <= .95:
             counter+=1
         #x =  landmarks.part(36).x
         #y = landmarks.part(36).y
