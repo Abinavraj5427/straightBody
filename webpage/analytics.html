@@ -5,7 +5,10 @@
     <title>Straight Body</title>
 
     <!-- CSS -->
-
+    <script src="main.dart.js" type="application/javascript"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-app.js"></script>
+    <script src ="https://www.gstatic.com/firebasejs/7.15.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-auth.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Suez+One&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./css/styles.css">
     <link rel="stylesheet" href="./css/analytics.css">
@@ -31,31 +34,31 @@
         <div class="postchart">
             <canvas id="myChart"></canvas>
             <script>
-                var ctx = document.getElementById('myChart').getContext('2d');
-                var mychart = new Chart(ctx, {
-                    // The type of chart we want to create
-                    type: 'line',
+                // var ctx = document.getElementById('myChart').getContext('2d');
+                // var mychart = new Chart(ctx, {
+                //     // The type of chart we want to create
+                //     type: 'line',
 
-                    // The data for our dataset
-                    data: {
-                        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-                        datasets: [{
-                            label: 'POSTURE AREA',
-                            backgroundColor: 'rgb(255, 99, 132)',
-                            borderColor: 'rgb(255, 99, 132)',
-                            data: [0, 10, 5, 2, 20, 30, 45]
-                        }]
-                    },
+                //     // The data for our dataset
+                //     data: {
+                //         labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+                //         datasets: [{
+                //             label: 'POSTURE AREA',
+                //             backgroundColor: 'rgb(255, 99, 132)',
+                //             borderColor: 'rgb(255, 99, 132)',
+                //             data: [0, 10, 5, 2, 20, 30, 45]
+                //         }]
+                //     },
 
-                    // Configuration options go here
-                    options: {}
-                });
+                //     // Configuration options go here
+                //     options: {}
+                // });
             </script>
         </div>
 
         <div class="concchart">
-            <canvas id="urChart"></canvas>
-            <script>
+            <canvas id="otherChart"></canvas>
+            <!-- <script>
                 var sec = document.getElementById('urChart').getContext('2d');
                 var urchart = new Chart(sec, {
                     // The type of chart we want to create
@@ -75,12 +78,12 @@
                     // Configuration options go here
                     options: {}
                 });
-            </script>
+            </script> -->
         </div>
 
         <div class="pichart">
             <canvas id="concpi"></canvas>
-            <script>
+            <!-- <script>
                 var thi = document.getElementById('concpi').getContext('2d');
                 var concpi = new Chart(thi, {
                     // The type of chart we want to create
@@ -100,7 +103,7 @@
                     // Configuration options go here
                     options: {}
                 });
-            </script>
+            </script> -->
 
         </div>
 
