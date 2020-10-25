@@ -10,16 +10,21 @@ query = Eye_ref.order_by('time', direction=firestore.Query.DESCENDING).limit(1)
 results = query.stream()
 last_doc = list(results)[-1].to_dict()
 time_on = last_doc['time']
-print(time_on)
+
 counter = last_doc['contactCounter']
 time_counter = last_doc['counter']
 
 # One-time initialization
 toaster = ToastNotifier()
-
-# Show notification whenever needed
-toaster.show_toast("Notification!", "Alert!", threaded=True,
+if counter >= 4636:
+    toaster.show_toast("Notification!", "You have been watching the screen for 40 minutes, take a 5-10 min break off screen", threaded=True,
                    icon_path=None, duration=3)  # 3 seconds
+
+if counter >= 4636:
+    toaster.show_toast("Notification!", "You have been watching the screen for 40 minutes, take a 5-10 min break off screen", threaded=True,
+                   icon_path=None, duration=3)  # 3 seconds
+# Show notification whenever needed
+
 
 # To check if any notifications are active,
 # use `toaster.notification_active()`
