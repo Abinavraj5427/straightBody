@@ -13,3 +13,6 @@ def get_db():
 
 def get_firebase():
     return firebase_admin
+
+def get_firestore():
+    return firestore

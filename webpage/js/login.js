@@ -27,9 +27,9 @@ function signUp(){
 
     
 }
-
-function signIn(){
-    var email = document.getElementById("username");
+var email
+window.onload = function signIn(){
+    email = document.getElementById("username");
     var password = document.getElementById("password");
 
     const promise = auth.signInWithEmailAndPassword(email.value, password.value);
@@ -48,7 +48,7 @@ function signOut(){
 
 auth.onAuthStateChanged(function(user){
     if(user){
-        //we have a user that is logged in
+        export {email as email}
     }
     else{
         //not logged in
