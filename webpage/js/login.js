@@ -15,42 +15,45 @@ firebase.initializeApp(firebaseConfig);
 
 const auth = firebase.auth();
 
-function signUp(){
+function signUp() {
     var email = document.getElementById("username");
     var password = document.getElementById("password");
 
     const promise = auth.createUserWithEmailAndPassword(email.value, password.value);
-    if (promise.catch(e=> alert(e.message)));
-    else{
+    if (promise.catch(e => alert(e.message)));
+    else {
         alert("Signed Up");
     }
 
-    
+
 }
 var email
-window.onload = function signIn(){
+function signIn() {
     email = document.getElementById("username");
     var password = document.getElementById("password");
 
-    const promise = auth.signInWithEmailAndPassword(email.value, password.value);
-    if(promise.catch(e=> alert(e.message)));
-    else{
-        alert("Signed In" + email.value);
-    }
+    auth.signInWithEmailAndPassword(email.value, password.value)
+    .then(res => {
+        console.log(res);
+        console.log("Signed In" + email.value);
+        window.location.href = "./dash.html";
+    })
+    .catch(e => {console.log(e)});
 
-    
+
 }
 
-function signOut(){
+function signOut() {
     auth.signOut();
     alert("Signed out");
 }
 
-auth.onAuthStateChanged(function(user){
-    if(user){
-        export {email as email}
+auth.onAuthStateChanged(function (user) {
+    if (user) {
+        
+        // export {email as email}
     }
-    else{
+    else {
         //not logged in
     }
 });

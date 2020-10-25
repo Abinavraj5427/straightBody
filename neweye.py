@@ -83,6 +83,7 @@ def eyeProcess(frame):
     onScreen = False
     counter = last_doc['contactCounter']
     time_counter = last_doc['counter']
+    blink = last_doc['Blink']
     time_counter +=1
     # _, frame = cap.read()
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
@@ -100,6 +101,8 @@ def eyeProcess(frame):
         
         if left_eye_ratio > 5.4 and right_eye_ratio > 5.7:
            cv2.putText(frame, "Blinking", (50,150), font, 4, (255,0,0))
+           blink +=1
+
 
         #GAZE DECTECTION CODE
         
@@ -146,6 +149,7 @@ def eyeProcess(frame):
         'time': firestore.SERVER_TIMESTAMP,
         'id': last_doc['id']+1,
         'onScreen': onScreen,
+        'Blink': blink,
 
      })
     key = cv2.waitKey(1)

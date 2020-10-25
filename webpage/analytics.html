@@ -35,24 +35,24 @@
             <canvas id="myChart"></canvas>
             <script>
                 var ctx = document.getElementById('myChart').getContext('2d');
-var mychart = new Chart(ctx, {
-    // The type of chart we want to create
-    type: 'line',
+                var mychart = new Chart(ctx, {
+                    // The type of chart we want to create
+                    type: 'line',
 
-    // The data for our dataset
-    data: {
-        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-        datasets: [{
-            label: 'POSTURE AREA',
-            backgroundColor: 'rgb(255, 99, 132)',
-            borderColor: 'rgb(255, 99, 132)',
-            data: [0, 10, 5, 2, 20, 30, 45]
-        }]
-    },
+                    // The data for our dataset
+                    data: {
+                        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+                        datasets: [{
+                            label: 'POSTURE AREA',
+                            backgroundColor: 'rgb(255, 99, 132)',
+                            borderColor: 'rgb(255, 99, 132)',
+                            data: [0, 10, 5, 2, 20, 30, 45]
+                        }]
+                    },
 
-    // Configuration options go here
-    options: {}
-});
+                    // Configuration options go here
+                    options: {}
+                });
             </script>
         </div>
 
@@ -60,24 +60,24 @@ var mychart = new Chart(ctx, {
             <canvas id="urChart"></canvas>
             <script>
                 var sec = document.getElementById('urChart').getContext('2d');
-var urchart = new Chart(sec, {
-    // The type of chart we want to create
-    type: 'line',
+                var urchart = new Chart(sec, {
+                    // The type of chart we want to create
+                    type: 'line',
 
-    // The data for our dataset
-    data: {
-        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-        datasets: [{
-            label: 'CONCENTRATION',
-            backgroundColor: 'rgb(255, 99, 132)',
-            borderColor: 'rgb(255, 99, 132)',
-            data: [0, 10, 5, 2, 20, 30, 45]
-        }]
-    },
+                    // The data for our dataset
+                    data: {
+                        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+                        datasets: [{
+                            label: 'CONCENTRATION',
+                            backgroundColor: 'rgb(255, 99, 132)',
+                            borderColor: 'rgb(255, 99, 132)',
+                            data: [0, 10, 5, 2, 20, 30, 45]
+                        }]
+                    },
 
-    // Configuration options go here
-    options: {}
-});
+                    // Configuration options go here
+                    options: {}
+                });
             </script>
         </div>
 
@@ -85,63 +85,64 @@ var urchart = new Chart(sec, {
             <canvas id="concpi"></canvas>
             <script>
                 var thi = document.getElementById('concpi').getContext('2d');
-var concpi = new Chart(thi, {
-    // The type of chart we want to create
-    type: 'doughnut',
+                var concpi = new Chart(thi, {
+                    // The type of chart we want to create
+                    type: 'doughnut',
 
-    // The data for our dataset
-    data: {
-        labels: ["Total Concentration"],
-        datasets: [{
-            
-            data: [20,10],
-            backgroundColor: ['rgb(131,142,211)', 'rgb(9, 8, 61)'],
-            borderColor: ['rgb(131, 142, 211)', 'rgb(9, 8, 61)']
-        }]
-    },
+                    // The data for our dataset
+                    data: {
+                        labels: ["Total Concentration"],
+                        datasets: [{
 
-    // Configuration options go here
-    options: {}
-});
+                            data: [20, 10],
+                            backgroundColor: ['rgb(131,142,211)', 'rgb(9, 8, 61)'],
+                            borderColor: ['rgb(131, 142, 211)', 'rgb(9, 8, 61)']
+                        }]
+                    },
+
+                    // Configuration options go here
+                    options: {}
+                });
             </script>
-            
+
         </div>
 
 
 
 
+        <!-- <canvas id="myChart" width="400" height="400"></canvas> -->
 
 
-            <div class="postbox">
-                <div class="pal">
+        <div class="postbox">
+            <div class="pal">
                 <p>POSTURE ALERTS</p>
-                </div>
-                <p id="pal1">~</p>
-                <script type="text/javascript">
-                    var postvar= 50;
-                    document.getElementById('pal1').innerHTML=postvar;
-                </script>
             </div>
-            <div class="screenbox">
-                <div class="sct">
+            <p id="pal1">~</p>
+            <script type="text/javascript">
+                var postvar = 50;
+                document.getElementById('pal1').innerHTML = postvar;
+            </script>
+        </div>
+        <div class="screenbox">
+            <div class="sct">
                 <p>SCREEN TIME</p>
-                </div>
-                <p id="sct1">~</p>
-                <script type="text/javascript">
-                    var screenvar= 50;
-                    document.getElementById('sct1').innerHTML=screenvar;
-                </script>
             </div>
-            <div class="breakbox">
-                <div class="nbr">
+            <p id="sct1">~</p>
+            <script type="text/javascript">
+                var screenvar = 50;
+                document.getElementById('sct1').innerHTML = screenvar;
+            </script>
+        </div>
+        <div class="breakbox">
+            <div class="nbr">
                 <p>NEXT BREAK</p>
-                </div>
-                <p id="nbr1">~</p>
-                <script type="text/javascript">
-                    var breakvar= 50;
-                    document.getElementById('nbr1').innerHTML=breakvar;
-                </script>
             </div>
+            <p id="nbr1">~</p>
+            <script type="text/javascript">
+                var breakvar = 50;
+                document.getElementById('nbr1').innerHTML = breakvar;
+            </script>
+        </div>
 
 
 </body>
