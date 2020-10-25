@@ -1,6 +1,6 @@
 import cv2
 import numpy as py
-
+import firebase
 
 cap = cv2.VideoCapture(0)
 hue = [0, 255]
@@ -19,7 +19,14 @@ min_ratio = 0
 max_ratio = 1000
 # max_left_point = 0
 # max_right_point = 0
+area = 0
+total = 0
+
+db = firebase.get_db()
+fb = firebase.get_firebase()
+fs = firebase.get_firestore()
 while True:
+    doccount = 0
     ret, raw = cap.read()
     imgorg = raw.copy()
     frame = cv2. cvtColor(imgorg, cv2.COLOR_BGR2HSV)
@@ -65,10 +72,10 @@ while True:
         if max_contour < len(contournew[i]):
             max_contour_index = i
 
-
-    largest_contour = contournew[max_contour_index]
-    area = cv2.contourArea(largest_contour)
-    print(area)
+    if(len(contournew) > 0):
+        largest_contour = contournew[max_contour_index]
+        area = cv2.contourArea(largest_contour)
+        print(area)
     # for i in range(len(largest_contour)):
         # print(contour[i][0])
         # if (max_left_point < contour[i][0]):
@@ -76,12 +83,28 @@ while True:
 
 
     #print(contour)
+    docs = db.collection(u'Postures').stream()
+    Postures_ref = db.collection(u'Postures')
+    query = Postures_ref.order_by(
+        u'Postures', direction=fs.Query.DESCENDING).limit(1).get()
 
+    print("lastdoc")
+    for lastdoc in query:
+        print(lastdoc.to_dict())
+        print(lastdoc.id)
 
     cv2.imshow("Frame", frame)
     cv2.imshow("Threshold", threshold)
     cv2.imshow("Contours", contour)
-
+    # data = {
+    #     u'area': area,
+    #     u'average': average,
+    #     u'time': fb.database.ServerValue.TIMESTAMP,
+    #     u'total': total,
+    #
+    # }
+    # db.collection(u'Posture').document(u'data').set(data)
+    # total+=1
 
     if cv2.waitKey(1) == ord('q'):
         break
